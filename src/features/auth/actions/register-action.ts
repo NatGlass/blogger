@@ -1,3 +1,5 @@
+"use server";
+
 import { lucia } from "@/auth";
 import prisma from "@/lib/prisma";
 import { hash } from "@node-rs/argon2";
