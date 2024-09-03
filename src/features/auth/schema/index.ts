@@ -48,3 +48,11 @@ export const loginUserSchema = z.object({
 });
 
 export type LoginUserSchemaType = z.infer<typeof loginUserSchema>;
+
+export const emailVerificationSchema = z.object({
+  code: z.string().min(8).max(8),
+});
+
+export type EmailVerificationSchemaType = z.infer<
+  typeof emailVerificationSchema
+>;

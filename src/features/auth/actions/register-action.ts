@@ -8,6 +8,8 @@ import { isRedirectError } from "next/dist/client/components/redirect";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { type RegisterUserSchemaType, registerUserSchema } from "../schema";
+import { generateEmailVerificationCode } from "../lib/generateEmailVerificationCode";
+import { sendVerificationCode } from "../lib/sendVerificationCode";
 
 export async function registerAction(
   credentials: RegisterUserSchemaType
@@ -57,8 +59,13 @@ export async function registerAction(
         username,
         email,
         passwordHash,
+        emailVerified: null,
       },
     });
+
+    const verificationCode = await generateEmailVerificationCode(userId, email);
+
+    await sendVerificationCode(email, verificationCode);
 
     const session = await lucia.createSession(userId, {});
 

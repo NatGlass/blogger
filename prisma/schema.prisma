@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
   id       String    @id
   name     String
@@ -22,12 +15,14 @@ model User {
   imageUrl    String?
   passwordHash String?
 
+  emailVerified DateTime?
+
   googleId String? @unique
   githubId String? @unique
 
   sessions Session[]
-
-  Profile Profile[]
+  Profile Profile?
+  EmailVerificationCode EmailVerificationCode[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -40,7 +35,7 @@ model Profile {
   bio String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String
+  userId String @unique
 
   @@map("profiles")
 }
@@ -53,4 +48,19 @@ model Session {
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 
   @@map("sessions")
+}
+
+model EmailVerificationCode {
+  id String @id @default(cuid())
+  code String
+
+  userId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  email String
+  expiresAt DateTime
+
+  @@index([code, expiresAt])
+  @@map("email_verification_code")
 }
