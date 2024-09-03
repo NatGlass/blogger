@@ -25,6 +25,13 @@ export const lucia = new Lucia(adapter, {
   },
 });
 
+declare module "lucia" {
+  interface Register {
+    Lucia: typeof lucia;
+    DatabaseUserAttributes: DatabaseUserAttributes;
+  }
+}
+
 interface DatabaseUserAttributes {
   id: string;
   username: string;
@@ -72,10 +79,3 @@ export const validateRequest = cache(
     return result;
   }
 );
-
-declare module "lucia" {
-  interface Register {
-    Lucia: typeof lucia;
-    DatabaseUserAttributes: DatabaseUserAttributes;
-  }
-}
