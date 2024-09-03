@@ -94,7 +94,10 @@ function RegisterForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Register</Button>
+        {error && <p className="text-red-500">{error}</p>}
+        <Button type="submit" disabled={isPending}>
+          Register
+        </Button>
       </form>
     </Form>
   );

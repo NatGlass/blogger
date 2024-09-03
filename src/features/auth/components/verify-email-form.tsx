@@ -16,10 +16,10 @@ import { useForm } from "react-hook-form";
 import { verifyEmailAction } from "../actions/verify-email-action";
 import {
   type EmailVerificationSchemaType,
-  type RegisterUserSchemaType,
   emailVerificationSchema,
-  registerUserSchema,
 } from "../schema";
+
+// TODO: Style this form for code input
 
 function VerifyEmailForm() {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -58,7 +58,7 @@ function VerifyEmailForm() {
           )}
         />
         {error && <p className="text-red-500">{error}</p>}
-        <Button type="submit">Verify</Button>
+        <Button type="submit" disabled={isPending}>Verify</Button>
       </form>
     </Form>
   );
