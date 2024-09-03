@@ -15,6 +15,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { loginAction } from "../actions/login-action";
 import { type LoginUserSchemaType, loginUserSchema } from "../schema";
+import { PasswordInput } from "./password-input";
 
 function LoginForm() {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -60,7 +61,7 @@ function LoginForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <PasswordInput {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

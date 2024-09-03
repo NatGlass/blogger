@@ -15,6 +15,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { registerAction } from "../actions/register-action";
 import { type RegisterUserSchemaType, registerUserSchema } from "../schema";
+import { PasswordInput } from "./password-input";
 
 function RegisterForm() {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -88,7 +89,7 @@ function RegisterForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <PasswordInput {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
