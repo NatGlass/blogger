@@ -1,4 +1,5 @@
 import { validateRequest } from "@/auth";
+import Header from "@/components/global/header";
 import SessionProvider from "@/contexts/SessionProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -20,7 +21,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider value={session}>{children}</SessionProvider>
+        <SessionProvider value={session}>
+          <Header />
+          <main>{children}</main>
+        </SessionProvider>
       </body>
     </html>
   );

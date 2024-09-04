@@ -24,9 +24,12 @@ function HomePage() {
     );
   }
 
+  const isVerified = user.emailVerified !== null;
+
   return (
     <div>
       <p> Signed in as {user.email}</p>
+      <p>{isVerified ? "Email verified" : "Email not verified"}</p>
       <form action={logoutAction}>
         <Button>Logout</Button>
       </form>
