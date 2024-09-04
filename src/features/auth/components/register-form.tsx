@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import { registerAction } from "../actions/register-action";
 import { type RegisterUserSchemaType, registerUserSchema } from "../schema";
 import { PasswordInput } from "./password-input";
+import LoadingButton from "@/components/ui/loading-button";
 
 function RegisterForm() {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -96,9 +97,9 @@ function RegisterForm() {
           )}
         />
         {error && <p className="text-red-500">{error}</p>}
-        <Button type="submit" disabled={isPending}>
+        <LoadingButton type="submit" isLoading={isPending}>
           Register
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );

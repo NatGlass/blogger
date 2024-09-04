@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -10,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import LoadingButton from "@/components/ui/loading-button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -58,7 +58,9 @@ function VerifyEmailForm() {
           )}
         />
         {error && <p className="text-red-500">{error}</p>}
-        <Button type="submit" disabled={isPending}>Verify</Button>
+        <LoadingButton type="submit" isLoading={isPending}>
+          Verify
+        </LoadingButton>
       </form>
     </Form>
   );
